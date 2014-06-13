@@ -46,6 +46,16 @@ namespace GoogleChartSharp
             return TextEncoding(data);
         }
 
+		public static string Encode(long[] data)
+		{
+			return TextEncoding(data);
+		}
+
+		public static string Encode(ICollection<long[]> data)
+		{
+			return TextEncoding(data);
+		}
+
         #region Simple Encoding
 
         public static string SimpleEncoding(int[] data)
@@ -101,7 +111,7 @@ namespace GoogleChartSharp
 
             foreach (float[] objectArray in data)
             {
-                chartData += textEncode(objectArray) + "|";
+				chartData += textEncode (objectArray) + "|";
             }
 
             return chartData.TrimEnd("|".ToCharArray());
@@ -119,13 +129,47 @@ namespace GoogleChartSharp
                 }
                 else
                 {
-                    chartData += value.ToString() + ",";
+					chartData += value.ToString ("F") + ",";
                 }
             }
 
             return chartData.TrimEnd(",".ToCharArray());
         }
+		public static string TextEncoding(long[] data)
+		{
+			return "chd=t:" + textEncode(data);
+		}
 
+		public static string TextEncoding(ICollection<long[]> data)
+		{
+			string chartData = "chd=t:";
+
+			foreach (long[] objectArray in data)
+			{
+				chartData += textEncode (objectArray) + "|";
+			}
+
+			return chartData.TrimEnd("|".ToCharArray());
+		}
+
+		private static string textEncode(long[] data)
+		{
+			string chartData = string.Empty;
+
+			foreach (long value in data)
+			{
+				if (value == -1)
+				{
+					chartData += "-1,";
+				}
+				else
+				{
+					chartData += value.ToString () + ",";
+				}
+			}
+
+			return chartData.TrimEnd(",".ToCharArray());
+		}
         #endregion
 
         #region Extended Encoding

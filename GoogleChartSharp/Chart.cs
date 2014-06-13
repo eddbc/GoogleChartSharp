@@ -84,6 +84,24 @@ namespace GoogleChartSharp
         {
             this.data = ChartData.Encode(data);
         }
+
+		/// <summary>
+		/// Set chart to use single long dataset
+		/// </summary>
+		/// <param name="data"></param>
+		public void SetData(long[] data)
+		{
+			this.data = ChartData.Encode(data);
+		}
+
+		/// <summary>
+		/// Set chart to use long dataset collection
+		/// </summary>
+		/// <param name="data"></param>
+		public void SetData(ICollection<long[]> data)
+		{
+			this.data = ChartData.Encode(data);
+		}
         #endregion
 
         # region Chart Title
@@ -141,7 +159,7 @@ namespace GoogleChartSharp
 
         #endregion
 
-        # region Fills
+        #region Fills
         List<SolidFill> solidFills = new List<SolidFill>();
         List<LinearGradientFill> linearGradientFills = new List<LinearGradientFill>();
         List<LinearStripesFill> linearStripesFills = new List<LinearStripesFill>();
@@ -329,6 +347,7 @@ namespace GoogleChartSharp
         }
         #endregion
 
+		#region Output
         /// <summary>
         /// Return the chart api url for this chart
         /// </summary>
@@ -503,6 +522,8 @@ namespace GoogleChartSharp
 
         
     }
+	#endregion
+
 
     /// <summary>
     /// Thrown if the current chart type does not support the requested feature
